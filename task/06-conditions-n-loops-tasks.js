@@ -30,7 +30,10 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    if(num % 3 === 0 && num % 5 === 0) return 'FizzBuzz';
+    if(num % 3 === 0) return 'Fizz';
+    if(num % 5 === 0) return 'Buzz';
+    return num;
 }
 
 
@@ -46,7 +49,10 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    function factorial(n){
+        return (n !== 1) ? n * factorial(n-1) : 1;
+    }
+    return factorial(n);
 }
 
 
@@ -63,7 +69,11 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    let sum = 0;
+    for(; n1 <= n2; n1++){
+        sum += n1;
+    }
+    return sum;
 }
 
 
@@ -82,7 +92,9 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    let A = a*a, B = b*b, C = c*c;
+    if((a < b + c) && (b < a + c) && (c < a + b)) return true;
+    return false;
 }
 
 
@@ -119,7 +131,12 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+    return !(
+        rect1.top > rect2.top + rect2.height ||
+        rect1.left > rect2.left + rect2.width ||
+        rect1.top + rect1.height < rect2.top ||
+        rect1.left + rect1.width < rect2.left
+    );
 }
 
 
@@ -150,7 +167,14 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+    // let sqare = Math.PI * circle.radius;
+    // point.x -= circle.center.x;
+    // point.y -= circle.center.y;
+    // circle.center.x -= circle.center.x;
+    // circle.center.y -= circle.center.y;
+    // if(circle.radius > Math.sqrt(point.x*point.x + point.y*point.y)) return true;
+    // return false;
+    return Math.hypot(circle.center.x - point.x, circle.center.y - point.y) < circle.radius;
 }
 
 
@@ -167,6 +191,15 @@ function isInsideCircle(circle, point) {
  */
 function findFirstSingleChar(str) {
     throw new Error('Not implemented');
+    let counter = 0;
+    for(let i = 0; i < str.length; i++){
+        for(let j = i + 1; j < str.length; j++){
+            if(str[i] === str[j]) break;
+            else counter = str[i];
+        }
+    }
+    if(counter !== 0) return counter;
+    return null;
 }
 
 
@@ -192,7 +225,11 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+    return (isStartIncluded ? '[' : '(') +
+        Math.min(a, b) +
+        ', ' +
+        Math.max(a, b) +
+        (isEndIncluded ? ']' : ')');
 }
 
 
@@ -209,7 +246,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    return str.split('').reverse().join('');
 }
 
 
@@ -226,7 +263,7 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    return (Number(num.toString().split('').reverse().join('')));
 }
 
 
@@ -251,7 +288,12 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+    return ccn.toString().split('')
+        .reverse()
+        .map( (x) => parseInt(x) )
+        .map( (x,idx) => idx % 2 ? x * 2 : x )
+        .map( (x) => x > 9 ? (x % 10) + 1 : x )
+        .reduce( (accum, x) => accum += x ) % 10 === 0;
 }
 
 
@@ -270,7 +312,7 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    return (num - 1) % 9 + 1;
 }
 
 
@@ -296,7 +338,14 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+    var L = str.length + 1;
+    var reg = /\(\)|\|\||\[\]|\{\}|[1][2]|[3][4]|[5][6]|[7][7]|[8][8]|\<\>/;
+    while(str = str.replace(reg, '')){
+    if(L == 0) return true;
+    if(L != 0 && str.length == L) return false; 
+    L = str.length;
+  }
+  return true;
 }
 
 
