@@ -12,6 +12,7 @@
 /**
  * Parses a rfc2822 string date representation into date value
  * For rfc2822 date specification refer to : http://tools.ietf.org/html/rfc2822#page-14
+ * 
  *
  * @param {string} value
  * @return {date}
@@ -22,7 +23,8 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+   let date = new Date(value);
+   return date;
 }
 
 /**
@@ -37,7 +39,8 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+   let date = new Date(value);
+   return date;
 }
 
 
@@ -56,7 +59,9 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   throw new Error('Not implemented');
+   date = date.getFullYear();
+   if(date % 4 === 0 && (date % 400 === 0 || date % 100 !== 0)) return true;
+   return false;
 }
 
 
@@ -94,7 +99,7 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+   const pi = Math.PI;
 }
 
 
