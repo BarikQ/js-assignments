@@ -203,30 +203,9 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    let topOpenAng = '\u{0250C}';
-    let topCloseAng = '\u{02510}';
-    let botOpenAng = '\u{02514}';
-    let botCloseAng = '\u{02518}';
-  
-    let topBotMainChar = '\u{02500}';
-    let sideChar = '\u{02502}';
-    let regMainChar = '\u{00020}';
-  
-    function createStr(size, mainChar, openChar, closeChar, div) {
-      if(!div) {
-        div = '';
-      }
-      
-      return `${openChar}${mainChar.repeat(size - 2)}${closeChar}${div}`;
-    }
-  
-    let firstStr = createStr(width, topBotMainChar, topOpenAng, topCloseAng, '\n');
-    let middleStr = createStr(width, regMainChar, sideChar, sideChar, '\n');
-    let lastStr = createStr(width, topBotMainChar, botOpenAng, botCloseAng, '\n');
-  
-    const mainStr = createStr(height, middleStr, firstStr, lastStr);
-  
-    return mainStr;
+    return String.fromCharCode(9484) + String.fromCharCode(9472).repeat(width-2) + String.fromCharCode(9488) + "\n" +
+    (String.fromCharCode(9474) + " ".repeat(width-2) + String.fromCharCode(9474) + "\n").repeat(height-2) +
+    String.fromCharCode(9492) + String.fromCharCode(9472).repeat(width-2) + String.fromCharCode(9496) + "\n";
 }
 
 
