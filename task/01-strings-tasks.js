@@ -203,7 +203,30 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    throw new Error('Not implemented');
+    let topOpenAng = '\u{0250C}';
+    let topCloseAng = '\u{02510}';
+    let botOpenAng = '\u{02514}';
+    let botCloseAng = '\u{02518}';
+  
+    let topBotMainChar = '\u{02500}';
+    let sideChar = '\u{02502}';
+    let regMainChar = '\u{00020}';
+  
+    function createStr(size, mainChar, openChar, closeChar, div) {
+      if(!div) {
+        div = '';
+      }
+      
+      return `${openChar}${mainChar.repeat(size - 2)}${closeChar}${div}`;
+    }
+  
+    let firstStr = createStr(width, topBotMainChar, topOpenAng, topCloseAng, '\n');
+    let middleStr = createStr(width, regMainChar, sideChar, sideChar, '\n');
+    let lastStr = createStr(width, topBotMainChar, botOpenAng, botCloseAng, '\n');
+  
+    const mainStr = createStr(height, middleStr, firstStr, lastStr);
+  
+    return mainStr;
 }
 
 
@@ -223,7 +246,21 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    throw new Error('Not implemented');
+    let newStr = '';
+
+    for (let i = 0; i < str.length; i++) {
+      let charNum = str.charCodeAt(i);
+  
+      if ((charNum > 77 && charNum < 97) || (charNum > 109 && charNum < 123)) {
+        newStr += String.fromCharCode(charNum - 13);
+      } else if (charNum > 64 && charNum < 123) {
+        newStr += String.fromCharCode(charNum + 13);
+      } else {
+        newStr += String.fromCharCode(charNum);
+      }
+    }
+  
+    return newStr;
 }
 
 /**
